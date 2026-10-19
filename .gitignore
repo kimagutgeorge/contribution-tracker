@@ -1,5 +1,5 @@
 .env
-.nginx-config.txt
+nginx-config.txt
 node_modules/
 dist/
 .venv/
