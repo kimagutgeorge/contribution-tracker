@@ -40,7 +40,7 @@ To change the admin password, update `ADMIN_PASSWORD` and redeploy. Changing `SE
 
 ```bash
 cp .env.example .env   # then edit the values
-docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+docker compose up -d --build
 ```
 
 Open http://localhost:1404.

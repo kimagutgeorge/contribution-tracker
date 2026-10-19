@@ -5,8 +5,9 @@ services:
     depends_on:
       backend:
         condition: service_started
-    expose:
-      - "1404"
+    # Loopback only: the host nginx proxies contracker.stynett.com to this port.
+    ports:
+      - "127.0.0.1:1404:1404"
 
   backend:
     build: ./backend
