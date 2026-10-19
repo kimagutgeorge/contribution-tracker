@@ -31,7 +31,7 @@ Upgrading from the first version is automatic: on start, any amount already paid
    - `SECRET_KEY`: a long random string (`python3 -c "import secrets; print(secrets.token_urlsafe(48))"`)
    - `ADMIN_USERNAME`: optional, defaults to `admin`
    - `ADMIN_PASSWORD`: the admin login password
-4. Assign your domain to the **frontend** service, using port 80 (for example `https://contributions.example.com:80`). Do not expose `backend` or `db`.
+4. Assign your domain to the **frontend** service, using port 1404 (for example `https://contributions.example.com:1404`; Coolify serves it on normal HTTPS and only uses 1404 to reach the container). Do not expose `backend` or `db`.
 5. Deploy. Tables are created automatically on first start.
 
 To change the admin password, update `ADMIN_PASSWORD` and redeploy. Changing `SECRET_KEY` signs out everyone.
@@ -43,22 +43,22 @@ cp .env.example .env   # then edit the values
 docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
 ```
 
-Open http://localhost:8080.
+Open http://localhost:1404.
 
 ## Develop without Docker
 
 You need a Postgres database somewhere. Then:
 
 ```bash
-# API on http://localhost:5000
+# API on http://localhost:5003
 cd backend
 python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 export DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/contributions
 export SECRET_KEY=dev ADMIN_PASSWORD=admin123
 .venv/bin/python init_db.py
-.venv/bin/flask --app wsgi run --debug
+.venv/bin/flask --app wsgi run --debug --port 5003
 
-# Frontend on http://localhost:5173 (proxies /api to :5000)
+# Frontend on http://localhost:1404 (proxies /api to :5003)
 cd frontend
 npm install && npm run dev
 ```

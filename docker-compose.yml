@@ -6,7 +6,7 @@ services:
       backend:
         condition: service_started
     expose:
-      - "80"
+      - "1404"
 
   backend:
     build: ./backend
@@ -20,7 +20,7 @@ services:
       db:
         condition: service_healthy
     expose:
-      - "5000"
+      - "5003"
 
   db:
     image: postgres:16-alpine

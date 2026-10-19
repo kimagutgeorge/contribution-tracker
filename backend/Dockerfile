@@ -13,6 +13,6 @@ COPY . .
 RUN useradd --create-home appuser
 USER appuser
 
-EXPOSE 5000
+EXPOSE 5003
 
-CMD ["sh", "-c", "python init_db.py && exec gunicorn --bind 0.0.0.0:5000 --workers ${GUNICORN_WORKERS:-2} --access-logfile - wsgi:app"]
+CMD ["sh", "-c", "python init_db.py && exec gunicorn --bind 0.0.0.0:5003 --workers ${GUNICORN_WORKERS:-2} --access-logfile - wsgi:app"]
